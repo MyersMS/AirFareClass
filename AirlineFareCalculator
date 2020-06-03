@@ -1,0 +1,310 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+
+
+class TrafficAnalysis:
+
+    # Airline
+    localFlights = ['Southwest', 'Delta', 'American', 'United']
+    intFlights = ['Emirates']
+
+    # Destinations
+    east = ['D001', 'D002', 'AA1234']
+    mid = ['U100', 'U101', 'U102', 'U103']
+    south = ['SW100', 'SW101', 'SW102', 'SW103']
+    int = ['EM010']
+
+    # Seat Class
+    localFirstClass = ['A', 'B', 'C', 'D']
+    localBusinessClass = ['E', 'F', 'G', 'H', 'I', 'J']
+    localEconomyClass = ['K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y' ,'Z']
+
+    intFirstClass = ['A', 'B', 'C', 'D', 'E', 'F']
+    intBusinessClass = ['G', 'H', 'I','J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q']
+    intEconomyClass = ['R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y','Z', 'AA', 'BB', 'CC', 'DD', 'EE', 'FF', 'GG', 'HH', 'II', 'JJ', 'KK', 'LL']
+
+    # Seat Location
+    localSeatWindow = [1, 8]
+    localSeatAisle = [2, 3, 6, 7]
+    localSeatMiddle = [4, 5]
+
+    intSeatWindow = [1, 10]
+    intSeatAisle = [3, 4, 7, 8]
+    intSeatMiddle = [5, 6]
+
+    # Ticket costs
+    baseEast = 20
+    baseMid = 25
+    baseSouth = 30
+    baseInt = 300
+
+    # Seat costs
+    localFirstClassRate = 300
+    localBusinessClassRate = 200
+    localEconomyClassRate = 100
+
+    intFirstClassRate = 2000
+    intBusinessClassRate = 1500
+    intEconomyClassRate = 750
+
+    def __init__(self):
+
+        print 'Hi and welcome to FareChecker! Please enter your' \
+              ' FULL NAME as it appears on your passport: '
+        print
+        self.name = raw_input("-> ")
+        print
+        print
+
+        print 'Thanks {0}, please enter one of the following airline' \
+              ' names EXACTLY as it appears below: '.format(self.name)
+        print
+        print 'American  |  Delta      |'
+        print 'Emirates  |  Southwest  |  United'
+        print
+        self.airlineName = raw_input("-> ")
+        print
+        print
+
+        print 'The aircraft number EXACTLY as it appears below: '
+        print
+        print 'AA1234  ||  D001   |  D002  ||  EM010  ||'
+        print 'SW100    |  SW101  |  SW102  |  SW103  ||'
+        print 'U100     |  U101   |  U102   |  U103   ||'
+        print
+        self.flight = raw_input("-> ")
+        print
+        print
+
+        print 'The seat letter in UPPERCASE: '
+        print
+        self.seatLetter = raw_input("-> ")
+        print
+        print
+
+        print 'And finally, the seat number:'
+        print
+        self.seatNumber = raw_input("-> ")
+        print
+        print
+
+    def flightDetails(self):
+
+        print "-" * 50
+        print "{0}, the itinerary of your flight {1} is as follows: ".format(self.name, self.flight)
+        print
+
+        if self.airlineName == "Southwest":
+            if self.flight == "SW100":
+                return "Origin: Houston, TX \nDestination: Phoenix, AZ"
+            elif self.flight == "SW102":
+                return "Origin: Dallas, TX \nDestination: Tempe, AZ"
+            elif self.flight == "SW103":
+                return "Origin: Austin, TX \nDestination: Glendale, AZ"
+            else:
+                return "Flight does not exist."
+
+        elif self.airlineName == "Delta":
+            if self.flight == "D001":
+                return "Origin: State College, PA \nDestination: Worcester, MA"
+            elif self.flight == "D002":
+                return "Origin: Pittsburgh, PA \nDestination: Boston, MA"
+            else:
+                return "Flight does not exist."
+
+        elif self.airlineName == "American":
+            if self.flight == "AA1234":
+                return "Origin: Manchester, NH \nDestination: Raleigh, NC"
+            else:
+                return "Flight does not exist."
+
+        elif self.airlineName == "United":
+            if self.flight == "U100":
+                return "Origin: Kansas City, MO \nDestination: Tampa, FL"
+            elif self.flight == "U102":
+                return "Origin: Kansas City, KS \nDestination: Miami, FL"
+            elif self.flight == "U103":
+                return "Origin: Overland Park, MO \nDestination: Orlando, FL"
+            elif self.flight == "U103":
+                return "Origin: Columbia, MO \nDestination: Jacksonville, FL"
+            else:
+                return "Flight does not exist."
+
+        elif self.airlineName == "Emirates":
+            if self.flight == "EM010":
+                return "Origin: Los Angeles, USA \nDestination: Dubai, UAE"
+            else:
+                return "Flight does not exist."
+
+        else:
+            return "Flight does not exist."
+
+    def numberedFlights(self):
+
+        print "-" * 50
+        print "Today, the number of flights are: "
+        print
+
+        if self.airlineName == "Southwest":
+            return 15
+        elif self.airlineName == "Delta":
+            return 11
+        elif self.airlineName == "American":
+            return 9
+        elif self.airlineName == "United":
+            return 6
+        elif self.airlineName == "Emirates":
+            return 3
+        else:
+            return "Airline not available."
+
+    def seatClass(self):
+
+        print "-" * 50
+        print "Your seat {0} is located in: ".format(self.seatLetter)
+        print
+
+        if self.airlineName in TrafficAnalysis.localFlights:
+            if self.seatLetter in TrafficAnalysis.localFirstClass:
+                return "First Class"
+            elif self.seatLetter in TrafficAnalysis.localBusinessClass:
+                return "Business Class"
+            elif self.seatLetter in TrafficAnalysis.localEconomyClass:
+                return "Economy Class"
+            else:
+                return "Seat class not available"
+
+        elif self.airlineName in TrafficAnalysis.intFlights:
+            if self.seatLetter in TrafficAnalysis.intFirstClass:
+                return "First Class"
+            elif self.seatLetter in TrafficAnalysis.intBusinessClass:
+                return "Business Class"
+            elif self.seatLetter in TrafficAnalysis.intEconomyClass:
+                return "Economy Class"
+            else:
+                return "Seat class not available"
+
+        else:
+            return "Seat class not available."
+
+    def seatLocation(self):
+
+        print "-" * 50
+        print "Your seat number {0} is located in a: ".format(self.seatNumber)
+        print
+
+        if self.airlineName in TrafficAnalysis.localFlights:
+            if self.seatNumber in TrafficAnalysis.localSeatWindow:
+                return "Window Seat"
+            elif self.seatNumber in TrafficAnalysis.localSeatAisle:
+                return "Aisle Seat"
+            elif self.seatNumber in TrafficAnalysis.localSeatMiddle:
+                return "Middle Seat"
+            else:
+                return "Seat number not available"
+
+        elif self.airlineName in TrafficAnalysis.intFlights:
+            if self.seatNumber in TrafficAnalysis.intSeatWindow:
+                return "Window Seat"
+            elif self.seatNumber in TrafficAnalysis.intSeatAisle:
+                return "Aisle Seat"
+            elif self.seatNumber in TrafficAnalysis.intSeatMiddle:
+                return "Middle Seat"
+            else:
+                return "Seat number not available"
+
+        else:
+            return "Seat location not available."
+
+    def ticketCost(self):
+
+        print "-" * 50
+        print "And the total cost of your ticket in USD is: "
+        print
+
+        if self.flight in TrafficAnalysis.east:
+            if self.seatLetter in TrafficAnalysis.localFirstClass:
+                return TrafficAnalysis.localFirstClassRate + TrafficAnalysis.baseEast
+            elif self.seatLetter in TrafficAnalysis.localBusinessClass:
+                return TrafficAnalysis.localBusinessClassRate + TrafficAnalysis.baseEast
+            elif self.seatLetter in TrafficAnalysis.localEconomyClass:
+                return TrafficAnalysis.localEconomyClassRate + TrafficAnalysis.baseEast
+            else:
+                return "Rate does not exist."
+
+        elif self.flight in TrafficAnalysis.mid:
+            if self.seatLetter in TrafficAnalysis.localFirstClass:
+                return TrafficAnalysis.localFirstClassRate + TrafficAnalysis.baseMid
+            elif self.seatLetter in TrafficAnalysis.localBusinessClass:
+                return TrafficAnalysis.localBusinessClassRate + TrafficAnalysis.baseMid
+            elif self.seatLetter in TrafficAnalysis.localEconomyClass:
+                return TrafficAnalysis.localEconomyClassRate + TrafficAnalysis.baseMid
+            else:
+                return "Rate does not exist."
+
+        elif self.flight in TrafficAnalysis.south:
+            if self.seatLetter in TrafficAnalysis.localFirstClass:
+                return TrafficAnalysis.localFirstClassRate + TrafficAnalysis.baseSouth
+            elif self.seatLetter in TrafficAnalysis.localBusinessClass:
+                return TrafficAnalysis.localBusinessClassRate + TrafficAnalysis.baseSouth
+            elif self.seatLetter in TrafficAnalysis.localEconomyClass:
+                return TrafficAnalysis.localEconomyClassRate + TrafficAnalysis.baseSouth
+            else:
+                return "Rate does not exist."
+
+        elif self.flight in TrafficAnalysis.int:
+            if self.seatLetter in TrafficAnalysis.intFirstClass:
+                return TrafficAnalysis.intFirstClassRate + TrafficAnalysis.baseInt
+            elif self.seatLetter in TrafficAnalysis.intBusinessClass:
+                return TrafficAnalysis.intBusinessClassRate + TrafficAnalysis.baseInt
+            elif self.seatLetter in TrafficAnalysis.intEconomyClass:
+                return TrafficAnalysis.intEconomyClassRate + TrafficAnalysis.baseInt
+            else:
+                return "Rate does not exist."
+
+        else:
+            return "Rate does not exist."
+
+
+itinerary = TrafficAnalysis()
+print itinerary.flightDetails()
+print itinerary.numberedFlights()
+print itinerary.seatClass()
+print itinerary.seatLocation()
+print itinerary.ticketCost()
+
+
+
+# Check
+# itinerary = TrafficAnalysis('John Doe', Southwest', 'SW100', 'A', 1) ## Southwest, First class, Window
+# itinerary = TrafficAnalysis('John Doe', 'United', 'U101', 'G', 2) ## United, Business class, Aisle
+# itinerary = TrafficAnalysis('John Doe', 'American', 'AA1234', 'K', 4) ## American, Economy class, Middle
+# itinerary = TrafficAnalysis('John Doe', 'Emirates', 'EM010', 'F', 10) ## Emirates, First class, Window
+
+# print "Flight Details:"
+# print
+# print itinerary.flightDetails()
+# print "." *25
+#
+# print "Flights Per Day:"
+# print
+# print itinerary.numberedFlights()
+# print "." *25
+#
+# print "Seat Details:"
+# print
+# print itinerary.seatClass()
+# print itinerary.seatLocation()
+# print "." *25
+#
+# print "Ticket Cost:"
+# print
+# print itinerary.ticketCost()
+# print "." *25
+
+
+
+print
+print ".....COMPLETED....."
+print
